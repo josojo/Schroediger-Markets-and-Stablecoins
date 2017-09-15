@@ -1,0 +1,226 @@
+{
+  "contract_name": "VeriethVoting",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "evaluate",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "proposalsLength",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "receiveLeftEther",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "vote",
+          "type": "bool"
+        }
+      ],
+      "name": "vote",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "shareholderAddress_",
+          "type": "address"
+        },
+        {
+          "name": "newContractVerieth_",
+          "type": "address"
+        }
+      ],
+      "name": "proposeNewOracle",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "shareholderAddress_",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "newContractVerieth",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposeNewOracleEvent",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x606060405234610000575b6106be806100196000396000f300606060405263ffffffff60e060020a60003504166337143233811461005057806344c7c867146100625780638063b8b414610081578063c9d27afe14610093578063f8eb155c146100aa575b610000565b34610000576100606004356100d6565b005b346100005761006f6102a9565b60408051918252519081900360200190f35b34610000576100606004356102b0565b005b34610000576100606004356024351515610337565b005b61006f600160a060020a03600435811690602435166104ac565b60408051918252519081900360200190f35b60006000600183815481101561000057906000526020600020906007020160005b509150428260050154111561010b57610000565b81600401548260030154101561012057610000565b6006820154604080516000602091820181905282517f18160ddd0000000000000000000000000000000000000000000000000000000081529251600294600160a060020a0316936318160ddd936004808301949193928390030190829087803b156100005760325a03f11561000057505060405151905081156100005704826003015410156101ae57610000565b600682015460a060020a900460ff16156101c757610000565b60068201805460a060020a60ff02191660a060020a17908190558254604080517fa0c73cfa000000000000000000000000000000000000000000000000000000008152600160a060020a0392831660048201529051919092169163a0c73cfa91602480830192600092919082900301818387803b156100005760325a03f115610000575050506002820180546000918290556001840154604051919350600160a060020a03169183156108fc02918491818181858888f1935050505015156102a3576002820181905560068201805460a060020a60ff02191690555b5b505050565b6001545b90565b60006000600183815481101561000057906000526020600020906007020160005b50915042826005015462278d000110156102ea57610000565b5060028101805460009182905560068301546040519192600160a060020a039091169183156108fc0291849190818181858888f1935050505015156102a357600282018190555b5b505050565b600160a060020a03331660009081526020818152604080832085845290915281205460ff161561036657610000565b600160a060020a0333166000908152602081815260408083208684529091529020805460ff191660019081179091558054849081101561000057906000526020600020906007020160005b50905081156104325760068101546040805160006020918201819052825160e060020a6370a08231028152600160a060020a033381166004830152935193909416936370a08231936024808301949391928390030190829087803b156100005760325a03f115610000575050604051516003830180549091019055506102a3565b60068101546040805160006020918201819052825160e060020a6370a08231028152600160a060020a033381166004830152935193909416936370a08231936024808301949391928390030190829087803b156100005760325a03f115610000575050604051516004830180549091019055505b5b505050565b6000670de0b6b3a76400003410156104c357610000565b6001805480600101828181548183558181151161056d5760070281600702836000526020600020918201910161056d91905b8082111561056957805473ffffffffffffffffffffffffffffffffffffffff19908116825560018201805490911690556000600282018190556003820181905560048201819055600582015560068101805474ffffffffffffffffffffffffffffffffffffffffff191690556007016104f5565b5090565b5b505050916000526020600020906007020160005b506040805161010081018252600160a060020a03868116808352338216602080850182905234858701819052600060608088018290526080880182905242621275000160a08901819052968e1660c0890181905260e0909801829052895473ffffffffffffffffffffffffffffffffffffffff1990811687178b556001808c018054831690971790965560028b019390935560038a0182905560048a0191909155600589019590955560069097018054909716851760a060020a60ff021916909655548451938452948301528183019390935290517f07fbe8d64d3fdfd319484bd8c2cfded15332f8c9989f121b3aecff23a6f01dbc93509081900390910190a150600154600019015b929150505600a165627a7a7230582035a5aae944a70272409f731eb44bd55f9e955ff6340f5a03f1d5764211170d3c0029",
+  "networks": {
+    "1492695179878": {
+      "events": {
+        "0x07fbe8d64d3fdfd319484bd8c2cfded15332f8c9989f121b3aecff23a6f01dbc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newContractVerieth",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x7963dc5ec3fe3483894de5e6ec29f983af849391",
+      "updated_at": 1492695222739
+    },
+    "1492695462109": {
+      "events": {
+        "0x07fbe8d64d3fdfd319484bd8c2cfded15332f8c9989f121b3aecff23a6f01dbc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newContractVerieth",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x54aa7b661f35d429e382709fb45881e40062093e",
+      "updated_at": 1492695469762
+    },
+    "1492695514608": {
+      "events": {
+        "0x07fbe8d64d3fdfd319484bd8c2cfded15332f8c9989f121b3aecff23a6f01dbc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newContractVerieth",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xf3c163ec1f6f025706489db05bbff26c06bfa6de",
+      "updated_at": 1492695520366
+    },
+    "1492761648672": {
+      "events": {
+        "0x07fbe8d64d3fdfd319484bd8c2cfded15332f8c9989f121b3aecff23a6f01dbc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newContractVerieth",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xd026d1ec3fd18246a8b47fec90450ae037c68511",
+      "updated_at": 1492762694770
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1492762694770
+}

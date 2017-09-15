@@ -1,0 +1,39 @@
+{
+  "contract_name": "OracleRequest",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "",
+          "type": "function"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "pushRequest",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x606060405234610000575b60b8806100186000396000f300606060405263ffffffff60e060020a6000350416632df520ab81146022575b6000565b606e6c010000000000000000000000006004359081049068010000000000000000900463ffffffff1660243560443560643573ffffffffffffffffffffffffffffffffffffffff166080565b60408051918252519081900360200190f35b60005b959450505050505600a165627a7a72305820a3a3f99e81a3b0a5d3f5eb502a0b6cd9299089f027f34f8ecc1bb519030c57240029",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1490484110699
+}

@@ -1,0 +1,3248 @@
+{
+  "contract_name": "VotingAboutOracle",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "proposalslength",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "evaluate",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "receiveLeftEther",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "vote",
+          "type": "bool"
+        }
+      ],
+      "name": "vote",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "shareholderAddress_",
+          "type": "address"
+        },
+        {
+          "name": "oracle_",
+          "type": "address"
+        },
+        {
+          "name": "oracleBillAddress_",
+          "type": "address"
+        },
+        {
+          "name": "oracleRequestCost_",
+          "type": "uint256"
+        },
+        {
+          "name": "oraclePaymentPerMonth_",
+          "type": "uint256"
+        }
+      ],
+      "name": "proposeNewOracle",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "shareholderAddress_",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "oracle_",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "oracleBillAddress_",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "oracleRequestCost_",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "oraclePaymentPerMonth_",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProposeNewOracleEvent",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x606060405234610000575b610957806100196000396000f300606060405263ffffffff60e060020a6000350416632ee76da18114610050578063371432331461006f5780638063b8b414610081578063c9d27afe14610093578063cfc04e71146100aa575b610000565b346100005761005d6100e2565b60408051918252519081900360200190f35b346100005761007f6004356100e9565b005b346100005761007f6004356103ff565b005b346100005761007f6004356024351515610486565b005b61005d600160a060020a03600435811690602435811690604435166064356084356105fb565b60408051918252519081900360200190f35b6001545b90565b600060006000600060018581548110156100005790600052602060002090600a020160005b506006810154604080516000602091820181905282517fcfa1aaf30000000000000000000000000000000000000000000000000000000081529251949850600160a060020a039093169363cfa1aaf3936004808501948390030190829087803b156100005760325a03f11561000057505060408051805160068801546000602093840181905284517f71967daa0000000000000000000000000000000000000000000000000000000081529451929850600160a060020a0390911694506371967daa936004808201949392918390030190829087803b156100005760325a03f11561000057505050604051805190509150428460050154111561021057610000565b83600401548460030154101561022557610000565b6006840154604080516000602091820181905282517f18160ddd0000000000000000000000000000000000000000000000000000000081529251600594600160a060020a0316936318160ddd936004808301949193928390030190829087803b156100005760325a03f11561000057505060405151905081156100005704846003015410156102b357610000565b600684015460a060020a900460ff16156102cc57610000565b60068401805474ff0000000000000000000000000000000000000000191660a060020a1790558354600785015460088601546009870154604080516000602091820181905282517f8c152d30000000000000000000000000000000000000000000000000000000008152600160a060020a039788166004820152958716602487015260448601949094526064850192909252608484018790525193871693638c152d309360a480820194918390030190829087803b156100005760325a03f1156100005750506040516002860180546000918290556001880154909450600160a060020a0316925083156108fc02918491818181858888f1935050505015156103f7576002840181905560068401805474ff0000000000000000000000000000000000000000191690555b5b5050505050565b6000600060018381548110156100005790600052602060002090600a020160005b50915042826005015462278d0001101561043957610000565b5060028101805460009182905560068301546040519192600160a060020a039091169183156108fc0291849190818181858888f19350505050151561048057600282018190555b5b505050565b600160a060020a03331660009081526020818152604080832085845290915281205460ff16156104b557610000565b600160a060020a0333166000908152602081815260408083208684529091529020805460ff19166001908117909155805484908110156100005790600052602060002090600a020160005b50905081156105815760068101546040805160006020918201819052825160e060020a6370a08231028152600160a060020a033381166004830152935193909416936370a08231936024808301949391928390030190829087803b156100005760325a03f11561000057505060405151600383018054909101905550610480565b60068101546040805160006020918201819052825160e060020a6370a08231028152600160a060020a033381166004830152935193909416936370a08231936024808301949391928390030190829087803b156100005760325a03f115610000575050604051516004830180549091019055505b5b505050565b600066038d7ea4c6800034101561061157610000565b600180548060010182818154818355818115116106d457600a0281600a0283600052602060002091820191016106d491905b808211156106d057805473ffffffffffffffffffffffffffffffffffffffff1990811682556001820180548216905560006002830181905560038301819055600483018190556005830181905560068301805474ffffffffffffffffffffffffffffffffffffffffff19169055600783018054909216909155600882018190556009820155600a01610643565b5090565b5b50505091600052602060002090600a020160005b6101606040519081016040528089600160a060020a0316815260200133600160a060020a031681526020013481526020016000815260200160008152602001426203f4800181526020018a600160a060020a0316815260200160001515815260200188600160a060020a0316815260200187815260200186815250909190915060008201518160000160006101000a815481600160a060020a030219169083600160a060020a0316021790555060208201518160010160006101000a815481600160a060020a030219169083600160a060020a0316021790555060408201518160020155606082015181600301556080820151816004015560a0820151816005015560c08201518160060160006101000a815481600160a060020a030219169083600160a060020a0316021790555060e08201518160060160146101000a81548160ff0219169083151502179055506101008201518160070160006101000a815481600160a060020a030219169083600160a060020a03160217905550610120820151816008015561014082015181600901555050507f0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a386868686866001805490506040518087600160a060020a0316600160a060020a0316815260200186600160a060020a0316600160a060020a0316815260200185600160a060020a0316600160a060020a03168152602001848152602001838152602001828152602001965050505050505060405180910390a150600154600019015b959450505050505600a165627a7a72305820e0ac0d89b4ccab878fdaec46f09df41b31c6a0c7114b537da3c74b8ab664d2b30029",
+  "networks": {
+    "1488717228006": {
+      "links": {},
+      "events": {},
+      "updated_at": 1488717767741
+    },
+    "1488731648956": {
+      "links": {},
+      "events": {},
+      "updated_at": 1488731660294
+    },
+    "1488732051186": {
+      "links": {},
+      "events": {},
+      "updated_at": 1488732067050
+    },
+    "1488824090709": {
+      "links": {},
+      "events": {},
+      "updated_at": 1488833956677,
+      "address": "0xd797db2c8831652079474fb3a47cbbb9a59a00b3"
+    },
+    "1489256078950": {
+      "events": {},
+      "links": {},
+      "address": "0x4d2140f59aaa164d97d9acf2c41864313b9e81a7",
+      "updated_at": 1489256507708
+    },
+    "1489275234858": {
+      "events": {},
+      "links": {},
+      "address": "0x06235aa88a85d5a45d295bc1940e2226e1f39b8e",
+      "updated_at": 1489275252130
+    },
+    "1489275390837": {
+      "events": {},
+      "links": {},
+      "address": "0xf1e589cbc3226baaca7f8cddd052e95083d47bf9",
+      "updated_at": 1489275425413
+    },
+    "1489306839530": {
+      "events": {},
+      "links": {},
+      "address": "0x1f9c15970afa992dcdc2976ed104ec1b3f7b2aaf",
+      "updated_at": 1489306884069
+    },
+    "1489308200123": {
+      "events": {},
+      "links": {},
+      "address": "0xd77d7b3f8e6e579c2bbf039bb148fc065df5a17d",
+      "updated_at": 1489308216402
+    },
+    "1489311251938": {
+      "events": {},
+      "links": {},
+      "address": "0x1b550b16372494df013c7325712b390e6fda8e8c",
+      "updated_at": 1489311526026
+    },
+    "1489319171862": {
+      "events": {},
+      "links": {},
+      "address": "0xd0f79f72c9a2f1d33efb35e953141012c83f137a",
+      "updated_at": 1489319198444
+    },
+    "1490423070051": {
+      "events": {},
+      "links": {},
+      "address": "0xa4342cf697b8eb6d85ee24ea63a6213ac24b8b8e",
+      "updated_at": 1490423292293
+    },
+    "1490425629611": {
+      "events": {},
+      "links": {},
+      "address": "0x531d18cf3d51616b496c0f07ccfa27af8edafeb2",
+      "updated_at": 1490425724928
+    },
+    "1490432446908": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xa3daa84fdf4916faa4ce12a7e60309c540ff8bdd",
+      "updated_at": 1490432460357
+    },
+    "1490470420586": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xf60c4aaee0b2ba9c3739da9a66f746945bc44c9e",
+      "updated_at": 1490470605107
+    },
+    "1490471901478": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x34b93bc7024c8a0ac3e961c9050f214f82ebab0d",
+      "updated_at": 1490471926302
+    },
+    "1490472518713": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xdce72fff46eabb7956a1792f17a6ea37cc3ce9f7",
+      "updated_at": 1490472618775
+    },
+    "1490473177245": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x3b929299bb086d7f20df86d0f64cd9ed25268476",
+      "updated_at": 1490473193574
+    },
+    "1490474002057": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xce5d4abaf9d78e13e62483910530d7299e330b4f",
+      "updated_at": 1490474039711
+    },
+    "1490474276271": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x942e798656427373aad5ab8b270792b795322b7e",
+      "updated_at": 1490474291068
+    },
+    "1490475038820": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8291257aaf3b8dedbd024bd5a8f6fd3f71d95900",
+      "updated_at": 1490475064891
+    },
+    "1490475154045": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x19ba2c56b134f6bb2ab0deb90e07195987677234",
+      "updated_at": 1490475164410
+    },
+    "1490475547231": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x08a6175441d8d987071648d840f5f1f521bea7a4",
+      "updated_at": 1490475560409
+    },
+    "1490476142329": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x3c93aaead4e4cd93f2f45419275160277eb4f4a2",
+      "updated_at": 1490480582632
+    },
+    "1490481925627": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe21b1fa3c7eb96a88382b2ec63e0922433020b30",
+      "updated_at": 1490481972664
+    },
+    "1490482549451": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8228b5f3b00aac41da3e7bfc4f4a6435cc7c2adc",
+      "updated_at": 1490482565936
+    },
+    "1490482928251": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe9701f51fb170af2d3371ad672ce67c01d891299",
+      "updated_at": 1490482960669
+    },
+    "1490483095733": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x15d5f76e7309b4a65e10ec27d8e905a210041ad2",
+      "updated_at": 1490483301563
+    },
+    "1490483408711": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x1dfa139eb5bdcad6779eef3ee04532c9b929f537",
+      "updated_at": 1490483444210
+    },
+    "1490484086590": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2df00ed02c2892975aa72aacdbced1197952df9d",
+      "updated_at": 1490484113132
+    },
+    "1490484389854": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xda1e6fce8017d4e63bf49b7d6336e306103817bf",
+      "updated_at": 1490484416253
+    },
+    "1490484877575": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x46eb29425c2cd8ecd2a3d79f6181f0e60eaff11a",
+      "updated_at": 1490484905173
+    },
+    "1490485080691": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8adc34e083b9981550a63e556adb169492f17157",
+      "updated_at": 1490485100232
+    },
+    "1490485635744": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xdb5e340a304994bceb5b165963b92c66f11aba7e",
+      "updated_at": 1490485661284
+    },
+    "1490486852822": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xa236edc14df7e6efc6c514a9098e893198f021ff",
+      "updated_at": 1490486892457
+    },
+    "1490511477670": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x7fafa3007469991c4a534e3c19ef5d91d0136afd",
+      "updated_at": 1490512465215
+    },
+    "1490512711849": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x12746ea4fe56472ab7f97c9eb2b44f625fd106e7",
+      "updated_at": 1490512728210
+    },
+    "1490512828367": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xcf7b4ec6223567f095d0b69198be06ea6e54c7d9",
+      "updated_at": 1490512836298
+    },
+    "1490531316534": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x421d69d0f9a2729ff4664a4823b21b585845913f",
+      "updated_at": 1490531368619
+    },
+    "1490539293931": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x870d53ae6d8255e9e7945496c3f0161445d60ddd",
+      "updated_at": 1490539846838
+    },
+    "1490541460925": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2b217f2db35afa141436a8f151576ab1a5cca4d0",
+      "updated_at": 1490541557526
+    },
+    "1490545088066": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x622637e2d8879bedc7d5e5a161cedfdf2232f34a",
+      "updated_at": 1490545752719
+    },
+    "1490716367678": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xbbbc4281296c44073f5690140eec540c1fe6c8e4",
+      "updated_at": 1490716915212
+    },
+    "1490721311959": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe518ad85db94c9ec174246756b83e39baf8fd026",
+      "updated_at": 1490721486732
+    },
+    "1490727356993": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe56a6a733e0257e6e6ce8c506bdd34afbffebc86",
+      "updated_at": 1490727390223
+    },
+    "1490730899408": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8b0c250bb543adcec92fb0022cf1b1418f854d14",
+      "updated_at": 1490730976540
+    },
+    "1490973821756": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x4b29ff644bfdb840dde54fb2ecd163149f95f4bb",
+      "updated_at": 1490977624265
+    },
+    "1490979174115": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x212ad3c6ab2461a7769830754fa378c930871430",
+      "updated_at": 1490979183990
+    },
+    "1490979600527": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x785ab2d06bf5b78faf8c2e3c0f32bd56d4a60704",
+      "updated_at": 1490979614375
+    },
+    "1490981045710": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x35bb5225a199308dde6a41a18fc9497bcc3695fb",
+      "updated_at": 1490981053324
+    },
+    "1490988520687": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe307a668c36f9f28f9fd71cc681a4d8807dab3f7",
+      "updated_at": 1490988533538
+    },
+    "1491024634666": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x319bb1b0f2901cddc8da533b2c391173b2878936",
+      "updated_at": 1491024659725
+    },
+    "1491025108934": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x4b334ce9f9ffd7bca1081c859c73ff44d69847a3",
+      "updated_at": 1491025122890
+    },
+    "1491025510591": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8a9cacdaebca7e6ecaaee1e61a1e18ce471a685a",
+      "updated_at": 1491025560241
+    },
+    "1491026043838": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xb7f1e27ff87e00785b95a5efb27f08ea5144bad6",
+      "updated_at": 1491026071018
+    },
+    "1491026966487": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8f097037d9a12f68e18ca3d8c5afcda511a22a2c",
+      "updated_at": 1491027348976
+    },
+    "1491027886417": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xf077a0ed55b8f0ac8897bd1046a4e1135efea9ff",
+      "updated_at": 1491027896607
+    },
+    "1491031592680": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x524b2041b09260f9df1ac9731c1e93378db26446",
+      "updated_at": 1491031620258
+    },
+    "1491034192126": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8067b2a116fb3370e7d5c22540b89b806fca8445",
+      "updated_at": 1491034206412
+    },
+    "1491035348043": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2b6eb0e13d5bb6a9b1a263f40b22d6a10f6f2bfc",
+      "updated_at": 1491035360275
+    },
+    "1491115111302": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xf5050aa80c3a856f39290c6378a0ecd36d30c2a9",
+      "updated_at": 1491115183463
+    },
+    "1491115846871": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xf3e0fbc7b09d08ccebfbfa946a2a7af009a9e1f4",
+      "updated_at": 1491115859002
+    },
+    "1491117697427": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x65380f7789e5c3f5e71b371d18c6eec794980160",
+      "updated_at": 1491117711037
+    },
+    "1491118575378": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xa3005fc21eeaaa8b7a8d0b437738556b2c86663e",
+      "updated_at": 1491118597637
+    },
+    "1491118873374": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x1e32cd648735a306894bd7475065c6a8e85116c1",
+      "updated_at": 1491118891189
+    },
+    "1491120561793": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xcfe33e1c15087017f5cd5c935fedc0fef283f05c",
+      "updated_at": 1491120630161
+    },
+    "1491120638513": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x70864ea715971931e15581851fdf43206bcfdc60",
+      "updated_at": 1491120652745
+    },
+    "1491120846697": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2a9da2cadb72167ba06d2910231c51b679c86cc2",
+      "updated_at": 1491120857204
+    },
+    "1491121145840": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x76fbf7e8a292e7edfa7dd25c58333fb459aa287d",
+      "updated_at": 1491121161139
+    },
+    "1491121225671": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xbfbd72f658424e51b48015a9c23d018e387ca466",
+      "updated_at": 1491121234202
+    },
+    "1491121623671": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x334599c6820a26919fd33fff3c31df10aa71c0c3",
+      "updated_at": 1491121636092
+    },
+    "1491122418986": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xddeee745dc22b177cdf192adf1c165143ae946b6",
+      "updated_at": 1491122429280
+    },
+    "1491122819304": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x59bd8a16e338e8b2fed65308a2ee541b3c7c2dc9",
+      "updated_at": 1491122831384
+    },
+    "1491122976441": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xcce58dfd98dbda609a34196506fe4a082204ecfb",
+      "updated_at": 1491122990355
+    },
+    "1491123082060": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xac3807003449931d60c99b9eee678b227169738b",
+      "updated_at": 1491123123611
+    },
+    "1491724329057": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xff9cd36ab62e87d08bae7b41529fb99361a9ad06",
+      "updated_at": 1491724341426
+    },
+    "1491733569015": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x825aab9173337c7a70732d7951948c548f5ffb02",
+      "updated_at": 1491733619382
+    },
+    "1491734211759": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x4ea0509c71eefb203aa3d548b59341be24635c57",
+      "updated_at": 1491734273938
+    },
+    "1492695179878": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xd8c59c65fb99b82e3c6d7feedddcf96f2ae13e85",
+      "updated_at": 1492695222755
+    },
+    "1492695462109": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x420b7f20f37614dcc409a22d3bb91a0d37eae193",
+      "updated_at": 1492695469788
+    },
+    "1492695514608": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xc7125eab59d051a1ba1fddce9b1485bcec0f07bc",
+      "updated_at": 1492695520386
+    },
+    "1492761648672": {
+      "events": {
+        "0x0c3a8450d1013b5f64032a261cc541b8aaa741cf8ad4c85e6c41b52f43bd55a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "shareholderAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracle_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleBillAddress_",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "oracleRequestCost_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "oraclePaymentPerMonth_",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposeNewOracleEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x35da51f208a684b35120a4dc4b5f3e0653652064",
+      "updated_at": 1492762694784
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1492764182649
+}
