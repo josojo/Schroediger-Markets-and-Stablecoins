@@ -4,6 +4,7 @@ var OracleWhiteListVoting= artifacts.require("./OracleWhiteListVoting.sol");
 var OracleRequests = artifacts.require("./OracleRequests.sol");
 var SafeMathLib = artifacts.require("./SafeMath.sol");
 var BasicToken = artifacts.require("./BasicToken.sol");
+var Event=artifacts.require("./Event.sol");
 
 
 //accounts[0] is only for deploying
@@ -19,7 +20,9 @@ module.exports = function(deployer, accounts) {
 	 return deployer.deploy(OracleWhiteListVoting,OracleRequests.address);
 	}).then(function() {
 	  return deployer.deploy(RealityToken,EscalationRealitySplit.address,OracleWhiteListVoting.address,0x0,1000000000);
+	
 	}).then(function() {
+		return deployer.deploy(Event,RealityToken.address,OracleRequests.address,2);
 	});
 
 };

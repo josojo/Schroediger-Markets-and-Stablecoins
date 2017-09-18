@@ -1,15 +1,12 @@
 pragma solidity ^0.4.15;
 import "./StandardToken.sol";
 
-
-
 contract RealityToken is StandardToken{
-
 
   // This contract is describing the underlying logic of the RealityToken.
   // It implements: - ERC20 token standard
   //                - New reality Tokens representing a reality split via child contracts
-  //		    - Crediting tokens to new reality forks
+  //	         	    - Crediting tokens to new reality forks
   //                -
   string public name = 'RealityToken';
   string public symbol = 'RTO';
@@ -20,6 +17,7 @@ contract RealityToken is StandardToken{
          require(msg.sender == _account);
          _;
      }
+
 	address public parentRealityToken;
 	address public realityChild1;
 	address public realityChild2;
@@ -35,6 +33,8 @@ contract RealityToken is StandardToken{
      balances[msg.sender]=amount;
      totalSupply=amount;
      INITIAL_SUPPLY =amount;
+     realityIsUnderInvestigation=false;
+     realityIsSplit=false;
 
   }
 
@@ -72,8 +72,9 @@ contract RealityToken is StandardToken{
     return true;
   }
 
-  function creditToChilds(){
+  function creditToChilds() returns (bool){
 	   require(realityIsSplit);
+     require(address(realityChild1)!=0);
 		if(!creditedToChild1[msg.sender]){
       creditedToChild1[msg.sender]=true;
 		    if(!(RealityToken(realityChild1).fundFromParentContract(balances[msg.sender],msg.sender)))

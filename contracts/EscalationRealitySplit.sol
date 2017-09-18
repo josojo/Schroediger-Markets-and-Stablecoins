@@ -25,6 +25,7 @@ struct Issue{
 	uint endOfVoting;
   bool allowanceWithdrawForBonders;
   bytes32 reportTransactionInfo;
+  address missBehavingOracle;
   mapping (address=>uint) bonder;
   mapping (address=> mapping(bool=>uint)) voter;
 }
@@ -37,7 +38,7 @@ Issue[] issues;
  uint64 public constant votingPeriod=2 days;
 
 //Todo:
-function reportIssue( address realityToken_,bytes32 reportTransactionInfo_){
+function reportIssue( address realityToken_,bytes32 reportTransactionInfo_, address missBehavingOracle_){
   require(RealityToken(realityToken_).transferFrom(msg.sender, this, reportIssueDeposit));
   require(!RealityToken(realityToken_).realityIsSplit());
   require(!RealityToken(realityToken_).realityIsUnderInvestigation());
@@ -50,6 +51,7 @@ function reportIssue( address realityToken_,bytes32 reportTransactionInfo_){
     realityToken:realityToken_,
   	stage:Stages.Reported,
   	endOfVoting:10000000,
+    missBehavingOracle:missBehavingOracle_,
     allowanceWithdrawForBonders:false,
     reportTransactionInfo:reportTransactionInfo_
   }));
