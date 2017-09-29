@@ -134,7 +134,12 @@ contract Event {
         realityTokens[_realityToken].isOutcomeSet = true;
         OutcomeAssignment(outcome, _realityToken);
     }
+    function getOutcome( address _realityToken)
+        public returns (uint)
+    {
+        return realityTokens[_realityToken].outcome;
 
+    }
     /// @dev Returns outcome count
     /// @return Outcome count
     function getOutcomeCount()

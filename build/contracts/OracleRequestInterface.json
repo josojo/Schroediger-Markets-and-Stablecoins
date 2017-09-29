@@ -1,0 +1,75 @@
+{
+  "contract_name": "OracleRequestInterface",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "callback_",
+          "type": "function"
+        },
+        {
+          "name": "oracleRequestDescription_",
+          "type": "bytes32"
+        },
+        {
+          "name": "feedRequestId_",
+          "type": "uint256"
+        },
+        {
+          "name": "feedInvestigationPeriod_",
+          "type": "uint256"
+        },
+        {
+          "name": "realityToken_",
+          "type": "address"
+        }
+      ],
+      "name": "pushRequest",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "requestNr",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "feedRequestId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "timeBlock",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "aDelay",
+          "type": "uint256"
+        }
+      ],
+      "name": "TakeRequests",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1506320854364
+}

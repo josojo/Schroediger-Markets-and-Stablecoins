@@ -63,10 +63,10 @@ contract RealityToken is StandardToken{
 
   //Interface for Child Contracts
 
-  function receiveChildContracts(address child1,address child2) external returns(bool){
+  function receiveChildContracts(address child1,address child2) returns(bool){
     require(realityIsSplit);
-    require(realityChild1==0x0);
-    require(realityChild2==0x0);
+    require(child1!=0x0);
+    require(child2!=0x0);
     realityChild1=child1;
   	realityChild2=child2;
     return true;
@@ -75,23 +75,29 @@ contract RealityToken is StandardToken{
   function creditToChilds() returns (bool){
 	   require(realityIsSplit);
      require(address(realityChild1)!=0);
+
 		if(!creditedToChild1[msg.sender]){
       creditedToChild1[msg.sender]=true;
-		    if(!(RealityToken(realityChild1).fundFromParentContract(balances[msg.sender],msg.sender)))
+		    if(!(RealityToken(realityChild1).fundFromParentContract(balances[msg.sender],msg.sender))){
         creditedToChild1[msg.sender]=false;
+        return false;
+      }
 		 }
 
 		if(!creditedToChild2[msg.sender]){
       creditedToChild2[msg.sender]=true;
-		    if(!(RealityToken(realityChild2).fundFromParentContract(balances[msg.sender],msg.sender)))
+		    if(!(RealityToken(realityChild2).fundFromParentContract(balances[msg.sender],msg.sender))){
         creditedToChild2[msg.sender]=false;
-		}
+        return false;}
+    }
+    return true;
 	}
 
- function fundFromParentContract(uint amount,address holder) onlyBy(parentRealityToken)returns(bool){
-  	require(msg.sender==parentRealityToken);
+ function fundFromParentContract(uint amount,address holder)
+  onlyBy(parentRealityToken)returns(bool)
+  {
   	totalSupply+=amount;
-  	balances[holder]+=amount;
+  	balances[holder]=balances[holder]+amount;
     return true;
  }
 
@@ -99,11 +105,14 @@ contract RealityToken is StandardToken{
   function warnRealityIsUnderInvestigation(bool isActive) onlyBy(EscalationRealitySplit){
     realityIsUnderInvestigation=isActive;
   }
+
   function isSplitted() onlyBy(EscalationRealitySplit){
     realityIsSplit=true;
   }
   function fundEscalationReward(address owner, uint amount) onlyBy(EscalationRealitySplit) returns(bool){
     balances[owner]+=amount;
+    totalSupply+=amount;
     return true;
   }
+
 }

@@ -42,6 +42,7 @@ contract('Contract Initialisastion', function(accounts) {
 
 
         //Add an oracle to the whitelist by voting
+
         oracle_id
         await realityToken.approve(oracleWhiteListVoting.address,1000)
         oracle_id = getParamFromTxEvent(
@@ -65,9 +66,8 @@ contract('Contract Initialisastion', function(accounts) {
 
         timeTravel(86400 * 4) //4 days later
         await mineBlock()
-        console.log("4 days later");
         await oracleWhiteListVoting.evaluate(oracle_id,{from: accounts[crowdfundcontract]} );
-
+        console.log("Oracle whiteListed");
 
 
 
@@ -83,7 +83,9 @@ contract('Contract Initialisastion', function(accounts) {
               await oracleRequests.receiveAnswer(0,0,{from: accounts[oracle]});
               timeTravel(86400 * 4) //4 days later
               await oracleRequests.sendAnswer(0,{from: accounts[oracle]});
-
+              outcome=await eventContract.getOutcome.call(realityToken.address);
+              
+              assert.equal(outcome,0);
     });
 
 	});
