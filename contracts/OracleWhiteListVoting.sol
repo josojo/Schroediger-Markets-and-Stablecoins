@@ -5,7 +5,7 @@ contract OracleWhiteListVoting {
   // This contract manages whitelisted oralces, which are allowed to send information into the Reality Token system.
   //    Reality Token holders can vote for new Oracles or against existing oracles.
   mapping(address => mapping(address=>bool)) oracleWhiteList;
-  mapping(address => mapping(address=>bool)) oracleDepositAvailable;
+  mapping(address => mapping(address=>bool)) oracleWasEscalated;
 
   uint constant oracleSecurityDeposit=100;
 
@@ -63,12 +63,10 @@ contract OracleWhiteListVoting {
     proposals[id].evaluated=true;
     if(proposals[id].votedFor>proposals[id].votedAgainst && proposals[id].votedFor*20>RealityToken(proposals[id].realityToken).totalSupply()){
       oracleWhiteList[proposals[id].realityToken][proposals[id].oracle]=true;
-      oracleDepositAvailable[proposals[id].realityToken][proposals[id].oracle]=true;
       NewWhiteListedOracle(proposals[id].realityToken,proposals[id].oracle);
     }
     else{
       oracleWhiteList[proposals[id].realityToken][proposals[id].oracle]=false;
-      oracleDepositAvailable[proposals[id].realityToken][proposals[id].oracle]=true;
     }
   }
   // After the offical voting time, people can withdraw their RealityTokens, which they used for voting.
@@ -91,7 +89,20 @@ contract OracleWhiteListVoting {
   // In case of an escalation, the SecurityDeposit of the oracle sending the information, which cause the split, will loose its security Deposit on the chain, which evaluated that the information was not correct
   function unsubscribedByEscalation(address realityToken,address oracle){
     require(msg.sender==RealityToken(realityToken).EscalationRealitySplit());
-     require(oracleDepositAvailable[realityToken][oracle]);
-     oracleDepositAvailable[realityToken][msg.sender]=false;
+     require(!oracleWasEscalated[realityToken][oracle]);
+     oracleWasEscalated[realityToken][msg.sender]=true;
   }
+  //pushing securityDeposits to Childcontracts; Only the escalated Oracle will not receive its funds in the branch oppositing the oracle
+  function pushSecurityDepositToChilds(address realityToken_){
+       require(oracleWhiteList[realityToken_][msg.sender]);
+
+       RealityToken(realityToken_).creditToChilds();
+
+         oracleWhiteList[RealityToken(realityToken_).realityChild1()][msg.sender]=true;
+       if(!oracleWasEscalated[realityToken_][msg.sender]){
+         oracleWhiteList[RealityToken(realityToken_).realityChild2()][msg.sender]=true;
+       }
+       oracleWhiteList[realityToken_][msg.sender]=false;
+  }
+
 }
