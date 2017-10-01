@@ -82,14 +82,12 @@ contract Event {
     }
     /// @dev Buys equal number of tokens of all outcomes, exchanging collateral tokens and sets of outcome tokens 1:1
     /// @param collateralTokenCount Number of collateral tokens
-    function buyAllOutcomes(uint collateralTokenCount, address _realityToken)
+    function buyAllOutcomes(uint collateralTokenCount)
         public
     {
-        //unfortunately, this is a hard requiremet, otherwise, things will get even more complicated.
-        require(realityTokens[_realityToken].newestBranch);
 
         // Transfer collateral tokens to events contract
-        require(RealityToken(_realityToken).transferFrom(msg.sender, this, collateralTokenCount));
+        require(RealityToken(realityToken).transferFrom(msg.sender, this, collateralTokenCount));
         // Issue new outcome tokens to sender
         for (uint8 i = 0; i < outcomeTokens.length; i++)
             outcomeTokens[i].issue(msg.sender, collateralTokenCount);
